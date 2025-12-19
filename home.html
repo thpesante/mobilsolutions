@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Yalopido" data-lang-en="Yalopido">Yalopido</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="notification.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <span class="logo-text">YaloPido</span>
+        <input type="search" id="search-input" placeholder="Buscar productos y ofertas..." data-lang-es-placeholder="Buscar productos y ofertas..." data-lang-en-placeholder="Search products and offers...">
+        <div id="location-button" class="location-display-btn" aria-label="Cambiar ubicación" data-lang-es-aria-label="Cambiar ubicación" data-lang-en-aria-label="Change location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span id="location-canton-name" data-lang-es="Ubicación" data-lang-en="Location">Ubicación</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section id="vendedores-list" class="section">
+            <h2 data-lang-es="Locales" data-lang-en="Stores">Locales</h2>
+            <div id="vendedores-container" class="horizontal-scroll"></div>
+        </section>
+
+        <section id="category-section" class="section">
+            <h2 data-lang-es="Categorías" data-lang-en="Categories">Categorías</h2>
+            <div id="category-scroll" class="horizontal-scroll"></div>
+        </section>
+        
+        <section id="recommendations-section" class="section">
+            <h2 data-lang-es="Recomendado para ti" data-lang-en="Recommended for You">Recomendado para ti</h2>
+            <div id="recommendations-container" class="horizontal-scroll"></div>
+        </section>
+
+        <section id="offers-section" class="section">
+            <h2 data-lang-es="Ofertas Exclusivas" data-lang-en="Exclusive Offers">Ofertas Exclusivas</h2>
+            <div id="offers-container" class="horizontal-scroll"></div>
+        </section>
+        
+        <section id="products-section" class="section">
+            <h2 data-lang-es="Todos los Productos" data-lang-en="All Products">Todos los Productos</h2>
+            <div id="product-grid" class="product-grid"></div>
+        </section>
+    </main>
+
+    <!-- Language FAB -->
+    <button id="language-fab" class="language-fab" aria-label="Cambiar idioma" data-lang-es-aria-label="Cambiar idioma" data-lang-en-aria-label="Change language">
+        <i class="fas fa-globe"></i>
+    </button>
+
+    <footer class="bottom-nav">
+        <a href="home.html" class="active"><i class="fas fa-home"></i><p data-lang-es="Inicio" data-lang-en="Home">Inicio</p></a>
+        <a href="mis_pedidos.html"><i class="fas fa-receipt"></i><p data-lang-es="Pedidos" data-lang-en="Orders">Pedidos</p></a>
+        <a href="cart.html" id="cart-button"><i class="fas fa-shopping-cart"></i><p data-lang-es="Carrito" data-lang-en="Cart">Carrito</p></a>
+        <a href="mi-cuenta.html"><i class="fas fa-user"></i><p data-lang-es="Cuenta" data-lang-en="Account">Cuenta</p></a>
+    </footer>
+
+    <!-- Location Change Modal -->
+    <div id="location-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h3 data-lang-es="Seleccionar Ubicación" data-lang-en="Select Location">Seleccionar Ubicación</h3>
+            <p data-lang-es="Elige una nueva ubicación para ver los locales y productos disponibles en esa zona." data-lang-en="Choose a new location to see stores and products available in that area.">Elige una nueva ubicación para ver los locales y productos disponibles en esa zona.</p>
+            
+            <div class="form-group">
+                <label for="province-select" data-lang-es="Provincia" data-lang-en="Province">Provincia</label>
+                <select id="province-select" class="form-control"></select>
+            </div>
+            
+            <div class="form-group">
+                <label for="canton-select" data-lang-es="Cantón" data-lang-en="Canton">Cantón</label>
+                <select id="canton-select" class="form-control" disabled></select>
+            </div>
+            
+            <div class="modal-actions">
+                <button id="cancel-location-change" class="btn btn-secondary" data-lang-es="Cancelar" data-lang-en="Cancel">Cancelar</button>
+                <button id="save-location-change" class="btn btn-primary" disabled data-lang-es="Aplicar Ubicación" data-lang-en="Apply Location">Aplicar Ubicación</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script src="home.js" defer></script>
+    <script src="ui.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - Yalopido</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="cuenta.css">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header"><div class="logo">Yalopido</div><div class="user-info"><p id="user-email"></p></div></div>
+        <ul class="sidebar-nav">
+            <li class="active" onclick="navigateTo('/pedidos')"><i class="fas fa-receipt"></i> Pedidos</li>
+            <li onclick="navigateTo('/ofertas.html')"><i class="fas fa-tags"></i> Ofertas</li>
+            <li onclick="navigateTo('/productos.html')"><i class="fas fa-box-open"></i> Productos</li>
+            <li onclick="navigateTo('/producto-destacado.html')"><i class="fas fa-star"></i> Producto destacado</li>
+            <li onclick="navigateTo('/reportes.html')"><i class="fas fa-chart-line"></i> Reportes</li>
+            <li onclick="navigateTo('/cuenta.html')"><i class="fas fa-user-shield"></i> Cuenta</li>
+        </ul>
+        <div class="sidebar-footer"><button id="logout-btn">Cerrar Sesión</button></div>
+    </aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <main class="main-content">
+        <header class="main-header"><button class="menu-btn" id="menu-btn"><i class="fas fa-bars"></i></button><h2>Gestión de Cuenta</h2></header>
+        <h1 class="desktop-only">Gestión de Cuenta</h1>
+        <div id="loader" class="spinner" style="display: block;"></div>
+        <div id="account-content" style="display: none;">
+            <div class="card">
+                <h2>Datos del Perfil</h2>
+                <div class="profile-pic-container">
+                    <label for="profile-pic-input"><img id="profile-image" src="https://via.placeholder.com/150" alt="Foto de perfil"><span>Cambiar foto</span></label>
+                    <input type="file" id="profile-pic-input" accept="image/*" style="display:none">
+                </div>
+                <div class="form-group"><label for="full-name">Nombre Completo</label><input type="text" id="full-name"></div>
+                <div class="form-group"><label for="phone">Teléfono</label><input type="tel" id="phone"></div>
+                <div class="form-group"><label for="address">Dirección</label><input type="text" id="address"></div>
+                <button id="save-profile-btn" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+            <div class="card">
+                <h2>Seguridad</h2>
+                <button id="open-password-modal-btn" class="btn btn-secondary">Cambiar Contraseña</button>
+            </div>
+
+            <!-- Nuevo Card: Horario de Atención -->
+            <div class="card">
+                <h2>Horario de Atención</h2>
+                <div id="schedule-form">
+                    <!-- Días de la semana -->
+                    <div class="schedule-day">
+                        <label for="monday-open">Lunes:</label>
+                        <input type="time" id="monday-open" value="09:00">
+                        <input type="time" id="monday-close" value="18:00">
+                    </div>
+                    <div class="schedule-day">
+                        <label for="tuesday-open">Martes:</label>
+                        <input type="time" id="tuesday-open" value="09:00">
+                        <input type="time" id="tuesday-close" value="18:00">
+                    </div>
+                    <div class="schedule-day">
+                        <label for="wednesday-open">Miércoles:</label>
+                        <input type="time" id="wednesday-open" value="09:00">
+                        <input type="time" id="wednesday-close" value="18:00">
+                    </div>
+                    <div class="schedule-day">
+                        <label for="thursday-open">Jueves:</label>
+                        <input type="time" id="thursday-open" value="09:00">
+                        <input type="time" id="thursday-close" value="18:00">
+                    </div>
+                    <div class="schedule-day">
+                        <label for="friday-open">Viernes:</label>
+                        <input type="time" id="friday-open" value="09:00">
+                        <input type="time" id="friday-close" value="18:00">
+                    </div>
+                    <div class="schedule-day">
+                        <label for="saturday-open">Sábado:</label>
+                        <input type="time" id="saturday-open" value="09:00">
+                        <input type="time" id="saturday-close" value="14:00">
+                    </div>
+                    <div class="schedule-day">
+                        <label for="sunday-open">Domingo:</label>
+                        <input type="time" id="sunday-open" value="">
+                        <input type="time" id="sunday-close" value="">
+                    </div>
+                </div>
+                <button id="save-schedule-btn" class="btn btn-primary">Guardar Horario</button>
+            </div>
+
+            <!-- Nuevo Card: Estado del Local -->
+            <div class="card">
+                <h2>Estado del Local</h2>
+                <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                    <label for="closed-today-toggle" style="margin-bottom: 0;">Hoy no hay atención:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="closed-today-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="form-group" id="reason-group">
+                    <label for="closed-reason">Motivo (opcional):</label>
+                    <textarea id="closed-reason" placeholder="Ej. Remodelación, feriado, etc."></textarea>
+                </div>
+                <button id="save-status-btn" class="btn btn-primary">Actualizar Estado</button>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="password-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal-btn" class="close-btn">&times;</span>
+            <h2>Cambiar Contraseña</h2>
+            <div class="form-group"><label for="current-password">Contraseña Actual</label><input type="password" id="current-password"></div>
+            <div class="form-group"><label for="new-password">Nueva Contraseña</label><input type="password" id="new-password"></div>
+            <div class="form-group"><label for="confirm-password">Confirmar Nueva</label><input type="password" id="confirm-password"></div>
+            <p id="modal-error-msg" style="color:red; display:none;"></p>
+            <button id="save-password-btn" class="btn btn-primary">Guardar</button>
+            <button id="cancel-password-btn" class="btn" style="background-color:#ccc;">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script src="cuenta.js"></script>
+</body>
+</html>

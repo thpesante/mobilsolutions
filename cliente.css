@@ -1,0 +1,101 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: #009688;
+    color: white;
+    padding: 1rem;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    margin-left: 1rem;
+}
+
+#map {
+    height: calc(100vh - 120px);
+    width: 100%;
+}
+
+.solicitar-taxi-btn {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FFC107;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.menu-header {
+    background-color: #00796B;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.menu-header img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+}
+
+.menu-header h2 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.menu-header p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu li a {
+    display: block;
+    padding: 1rem;
+    text-decoration: none;
+    color: #333;
+}
+
+.side-menu li a:hover {
+    background-color: #f0f0f0;
+}

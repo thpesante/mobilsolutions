@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxinet</title>
+    <link rel="stylesheet" href="cliente.css">
+</head>
+<body>
+    <header>
+        <button class="menu-btn" id="menuBtn">&#9776;</button>
+        <h1>Mapa</h1>
+    </header>
+
+    <div id="map"></div>
+
+    <button class="solicitar-taxi-btn" id="solicitarTaxiBtn">Solicitar taxi</button>
+
+    <nav class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <img src="images/perfil.png" alt="Foto de perfil" id="userImage">
+            <h2 id="userGreeting">Hola, es bueno verte de nuevo</h2>
+            <p id="userName">Cargando...</p>
+        </div>
+        <ul>
+            <li><a href="#">Mapa</a></li>
+            <li><a href="#">Viajes realizados</a></li>
+            <li><a href="#">Notificaciones</a></li>
+            <li><a href="#">Cuenta</a></li>
+            <li><a href="#" id="logoutBtn">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+
+    <!-- SDK de Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzxl8zxRGhew5zIP4Lz7o_opWbFtw3T0Y&callback=initMap" async defer></script>
+    <script src="cliente.js"></script>
+</body>
+</html>

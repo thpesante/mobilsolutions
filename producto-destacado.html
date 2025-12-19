@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socio Estratégico IA - Yalopido</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="producto-destacado.css">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">Yalopido</div>
+            <div class="user-info">
+                <img id="user-profile-pic" src="" alt="Foto de perfil" style="display: none;">
+                <span id="user-fullname"></span>
+            </div>
+        </div>
+        <ul class="sidebar-nav">
+            <li onclick="navigateTo('pedidos.html')"><i class="fas fa-receipt"></i> Pedidos</li>
+            <li onclick="navigateTo('ofertas.html')"><i class="fas fa-tags"></i> Ofertas</li>
+            <li onclick="navigateTo('productos.html')"><i class="fas fa-box-open"></i> Productos</li>
+            <li class="active" onclick="navigateTo('producto-destacado.html')"><i class="fas fa-star"></i> Producto destacado</li>
+            <li onclick="navigateTo('reportes.html')"><i class="fas fa-chart-line"></i> Reportes</li>
+            <li onclick="navigateTo('cuenta.html')"><i class="fas fa-user-shield"></i> Cuenta</li>
+        </ul>
+        <div class="sidebar-footer"><button id="logout-btn">Cerrar Sesión</button></div>
+    </aside>
+
+    <main class="main-content">
+        <h1 class="desktop-only">Visualización y Estrategia de Ventas</h1>
+
+        <div class="container">
+            <h2>Tus Productos Más Vendidos</h2>
+            <div id="product-ranking-scroller" class="scroller-container">
+                <p>Calculando ranking...</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2><i class="fas fa-user-tie"></i> Tu Socio Estratégico IA</h2>
+            <div class="ai-chat-container">
+                <div class="chat-messages" id="chat-messages"></div>
+                <div class="chat-input-area">
+                    <form id="chat-form">
+                        <input type="text" id="chat-input" placeholder="Conversa con tu asistente de ventas..." autocomplete="off">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="producto-destacado.js"></script>
+</body>
+</html>

@@ -1,1 +1,252 @@
-/* Add styles here */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background-color: #2a0a4a;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em 0;
+    animation: fadeIn 1s ease-out;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1.5em;
+    font-size: 1.1em;
+    transition: color 0.3s;
+}
+
+nav a:hover, nav a.active {
+    color: #c86eff;
+}
+
+.lang-switcher button {
+    background: none;
+    border: 1px solid #c86eff;
+    color: #c86eff;
+    padding: 0.5em 1em;
+    margin-left: 0.5em;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.lang-switcher button.active, .lang-switcher button:hover {
+    background-color: #c86eff;
+    color: #2a0a4a;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4em 0;
+    animation: fadeIn 1.2s ease-out;
+}
+
+.hero-text {
+    max-width: 50%;
+}
+
+.hero-text h1 {
+    font-size: 3.5em;
+    margin-bottom: 0.5em;
+}
+
+.hero-text p {
+    font-size: 1.2em;
+    margin-bottom: 2em;
+}
+
+.hero-buttons .btn {
+    padding: 0.8em 2em;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn.primary {
+    background-color: #c86eff;
+    color: #2a0a4a;
+}
+.btn.primary:hover {
+    background-color: #fff;
+}
+
+.btn.secondary {
+    border: 2px solid #c86eff;
+    color: #c86eff;
+    margin-left: 1em;
+}
+.btn.secondary:hover {
+    background-color: #c86eff;
+    color: #2a0a4a;
+}
+
+.hero-image {
+    max-width: 45%;
+    animation: float 4s ease-in-out infinite;
+}
+.hero-image img {
+    width: 100%;
+    height: auto;
+}
+
+section {
+    padding: 4em 0;
+    animation: fadeIn 1s ease-out;
+    border-top: 1px solid #4a1a7a;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 1.5em;
+    color: #c86eff;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2em;
+}
+
+.service-card, .info-card {
+    background: #3a1a5a;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+     transition: transform 0.3s, box-shadow 0.3s;
+}
+.service-card:hover, .info-card:hover {
+   transform: translateY(-10px);
+   box-shadow: 0 8px 16px rgba(199, 110, 255, 0.3);
+}
+
+.service-card img {
+    max-width: 100px;
+    display: block;
+    margin: 0 auto 1em;
+    border-radius: 10px;
+}
+
+#contactenos {
+    background: #3a1a5a;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    border: none;
+    background-color: #4a2a6a;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 1em;
+    background-color: #c86eff;
+    color: #2a0a4a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #fff;
+}
+
+.whatsapp-link {
+    display: inline-block;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    padding: 0.8em 1.5em;
+    background-color: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.whatsapp-link:hover {
+    background-color: #128C7E;
+    transform: scale(1.05);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    nav {
+        margin-top: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    nav a {
+        margin: 0.5em 0;
+    }
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-text, .hero-image {
+        max-width: 100%;
+    }
+    .hero-image {
+        margin-top: 2em;
+    }
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+    .lang-switcher {
+        margin-top: 1em;
+    }
+}

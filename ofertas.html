@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Ofertas - Yalopido</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="ofertas.css">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar"> 
+    <div class="sidebar-header"><div class="logo">Yalopido</div><div class="user-info"><p id="user-email"></p></div></div>
+    <ul class="sidebar-nav">
+        <li onclick="navigateTo('pedidos.html')"><i class="fas fa-receipt"></i> Pedidos</li>
+        <li class="active" onclick="navigateTo('ofertas.html')"><i class="fas fa-tags"></i> Ofertas</li>
+        <li onclick="navigateTo('productos.html')"><i class="fas fa-box-open"></i> Productos</li>
+        <li onclick="navigateTo('producto-destacado.html')"><i class="fas fa-star"></i> Producto destacado</li>
+        <li onclick="navigateTo('reportes.html')"><i class="fas fa-chart-line"></i> Reportes</li>
+        <li onclick="navigateTo('cuenta.html')"><i class="fas fa-user-shield"></i> Cuenta</li>
+    </ul>
+        <div class="sidebar-footer"><button id="logout-btn">Cerrar Sesión</button></div>
+    </aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <main class="main-content">
+        <header class="main-header"><button class="menu-btn" id="menu-btn"><i class="fas fa-bars"></i></button><h2>Gestión de Ofertas</h2></header>
+        <h1 class="desktop-only">Gestión de Ofertas</h1>
+        <div class="container">
+            <h2>Sugerencias Inteligentes</h2>
+            <div id="suggestions-container"><p>Cargando sugerencias...</p></div>
+        </div>
+        <div class="container">
+            <h2>Crear Nueva Oferta</h2>
+            <div id="product-selection-grid"><p>Cargando todos los productos...</p></div>
+            <div class="offer-creation-form">
+                <div style="flex-grow: 1;"><label for="discount-percentage">Descuento (%)</label><input type="number" id="discount-percentage" min="1" max="99" placeholder="Ej: 15" class="form-group"></div>
+                <button id="create-offer-btn">Aplicar Oferta</button>
+            </div>
+        </div>
+        <div class="container"><h2>Ofertas Activas</h2><div id="active-offers-container"><p>Cargando...</p></div></div>
+    </main>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="ofertas.js"></script>
+</body>
+</html>

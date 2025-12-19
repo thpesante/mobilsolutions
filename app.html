@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yalopido - Inicia Sesión</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="notification.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo">Yalopido</div>
+        <div class="profile-section">
+            <button id="login-btn"><i class="fas fa-user"></i> Iniciar Sesión</button>
+            <button id="register-btn"><i class="fas fa-user-plus"></i> Registrarse</button>
+            <div id="user-view">
+                <span id="user-email"></span>
+                <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</button>
+            </div>
+            <div id="login-form-container">
+                <h3>Accede a tu cuenta</h3>
+                <form id="login-form">
+                    <div id="error-message"></div>
+                    <div class="input-group"><input type="email" id="email" placeholder="Correo electrónico" required></div>
+                    <div class="input-group"><input type="password" id="password" placeholder="Contraseña" required></div>
+                    <button id="login-submit-btn" type="submit">Ingresar</button>
+                </form>
+            </div>
+
+            <div id="register-form-container">
+                <h3>Crea tu cuenta</h3>
+                <form id="register-form">
+                    <div id="register-error-message"></div>
+                    <div class="input-group">
+                        <input type="text" id="register-fullName" placeholder="Nombre Completo" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="register-email" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="register-password" placeholder="Contraseña" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="register-phone" placeholder="Teléfono" required>
+                    </div>
+                    <div class="input-group">
+                        <select id="register-transactionType" required>
+                            <option value="">¿Quieres Vender o Comprar?</option>
+                            <option value="Comprador">Comprar</option>
+                            <option value="Vendedor">Vender</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <select id="register-province" required>
+                            <option value="">Selecciona tu Provincia</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <select id="register-canton" required disabled>
+                            <option value="">Selecciona tu Cantón</option>
+                        </select>
+                    </div>
+                    <button id="register-submit-btn" type="submit">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1>Todas las ciudades con delivery</h1>
+            <div>
+                <button id="hero-login-btn">Acceder a mi tienda</button>
+                <button id="hero-register-btn">Regístrate ahora</button>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Las mejores tiendas con delivery en tu ciudad</h2>
+            <div class="city-grid">
+                <p>Guayaquil</p><p>Cuenca</p><p>Ambato</p>
+                <p>Manta</p><p>Santo Domingo</p><p>Quito</p>
+                <p>Portoviejo</p><p>Santa Elena</p><p>Loja</p>
+                <p>Latacunga</p><p>Cayambe</p><p>Otavalo</p>
+                <p>Milagro</p><p>Guayas</p><p>Babahoyo</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Sobre Yalopido</h4>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Privacidad</a>
+            </div>
+            <div class="footer-col">
+                <h4>Top Categorías</h4>
+                <a href="#">Comida rápida</a>
+                <a href="#">Supermercados</a>
+                <a href="#">Bebidas</a>
+            </div>
+            <div class="footer-col">
+                <h4>Negocios</h4>
+                <a href="#">Registra tu negocio</a>
+                <a href="#">Centro de Socios</a>
+            </div>
+             <div class="footer-col">
+                <h4>Colaboradores</h4>
+                <a href="#">Yalopido para tus colaboradores</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Yalopido &copy; 2024</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script> <!-- Added Firebase Storage -->
+
+
+    <script src="app.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>

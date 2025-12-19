@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Deny all reads and writes by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Allow users to read and update their own user document.
+    // They cannot delete their own document or create one for another user.
+    match /users/{userId} {
+      allow read, update: if request.auth.uid == userId;
+      // Allow users to create their own user document upon registration.
+      allow create: if request.auth.uid == userId;
+    }
+  }
+}

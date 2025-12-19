@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos - Yalopido</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="productos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">Yalopido</div>
+            <div id="user-profile" class="user-profile">
+                <img id="user-photo" src="https://via.placeholder.com/40" alt="Foto de perfil">
+                <span id="full-name">Cargando...</span>
+            </div>
+        </div>
+        <ul class="sidebar-nav">
+            <li onclick="navigateTo('pedidos.html')"><i class="fas fa-receipt"></i> Pedidos</li>
+            <li onclick="navigateTo('ofertas.html')"><i class="fas fa-tags"></i> Ofertas</li>
+            <li class="active" onclick="navigateTo('productos.html')"><i class="fas fa-box-open"></i> Productos</li>
+            <li onclick="navigateTo('producto-destacado.html')"><i class="fas fa-star"></i> Producto destacado</li>
+            <li onclick="navigateTo('reportes.html')"><i class="fas fa-chart-line"></i> Reportes</li>
+            <li onclick="navigateTo('cuenta.html')"><i class="fas fa-user-shield"></i> Cuenta</li>
+        </ul>
+        <div class="sidebar-footer"><button id="logout-btn">Cerrar Sesión</button></div>
+    </aside>
+
+    <main class="main-content">
+        <h1>Mis Productos</h1>
+        <div class="toolbar">
+            <div class="search-bar"><input type="text" id="search-input" placeholder="Buscar producto por nombre..."></div>
+            <div class="toolbar-buttons">
+                <button id="import-btn" class="btn"><i class="fas fa-file-excel"></i> Importar</button>
+                <button id="add-product-btn" class="btn"><i class="fas fa-plus"></i> Añadir Producto</button>
+            </div>
+        </div>
+        <div id="products-grid"><p>Cargando productos...</p></div>
+    </main>
+
+    <!-- Modal para Añadir/Editar Producto -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-product-modal">&times;</span>
+            <h2 id="product-modal-title">Añadir Producto</h2>
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+                <div class="form-group">
+                    <label for="product-name">Nombre</label>
+                    <input type="text" id="product-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Precio</label>
+                    <input type="number" id="product-price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-category">Categoría</label>
+                    <select id="product-category" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Alcohol">Alcohol</option>
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Comida Rápida">Comida Rápida</option>
+                        <option value="Comida">Comida</option>
+                        <option value="Farmacia">Farmacia</option>
+                        <option value="Snacks">Snacks</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Descripción</label>
+                    <input type="text" id="product-description">
+                </div>
+                <div class="form-group">
+                    <label for="product-image-file">Subir Imagen (prioridad)</label>
+                    <input type="file" id="product-image-file" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="product-image-url">O Pegar URL de Imagen</label>
+                    <input type="url" id="product-image-url" placeholder="https://ejemplo.com/imagen.png">
+                </div>
+                <button type="submit" id="save-product-btn" class="btn" style="background-color: #28a745; color: white;">Guardar</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal para Importación Masiva -->
+    <div id="import-modal" class="modal">
+        <div class="modal-content import-modal">
+            <span class="close-btn" id="close-import-modal">&times;</span>
+            <div id="import-view-1">
+                <h2>Importación Masiva</h2>
+                 <div id="import-instructions" style="font-size: 14px; background-color: #f0f8ff; padding: 10px; border-radius: 5px; border-left: 4px solid #007bff;">
+                    <p>El archivo Excel debe tener las siguientes columnas:</p>
+                    <ul>
+                        <li><strong>NOMBRE PRODUCTO</strong></li>
+                        <li><strong>DESCRIPCION</strong> (opcional)</li>
+                        <li><strong>CATEGORIA</strong></li>
+                        <li><strong>PRECIO</strong></li>
+                        <li><strong>URL DE LA IMAGEN</strong> (opcional)</li>
+                    </ul>
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <label for="excel-file">Selecciona el archivo Excel (.xlsx):</label>
+                    <input type="file" id="excel-file" accept=".xlsx, .xls">
+                </div>
+                <button id="upload-excel-btn" class="btn" style="background-color:#007bff; color: white;">Leer Archivo</button>
+            </div>
+            <div id="import-view-2">
+                <lottie-player src="https://lottie.host/889b7999-56e6-43b9-91a5-893b0928292f/p62EZiF5hA.json" background="transparent" speed="1" style="width: 300px; height: 300px; margin: auto;" loop autoplay></lottie-player>
+                <h3 id="import-feedback">Procesando archivo...</h3>
+            </div>
+            <div id="import-view-3">
+                <h2>Vista Previa de Productos</h2>
+                <p>Verifica, edita o elimina productos antes de la importación final.</p>
+                <div class="preview-table-container">
+                    <table id="preview-table" class="preview-table">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                    <button id="cancel-import-btn" class="btn" style="background-color: #6c757d; color: white;">Cancelar</button>
+                    <button id="confirm-import-btn" class="btn" style="background-color: #28a745; color: white;">Confirmar y Crear Productos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script src="productos.js"></script>
+</body>
+</html>

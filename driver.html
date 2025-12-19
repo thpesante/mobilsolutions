@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conductor</title>
+    <link rel="stylesheet" href="driver.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="map"></div>
+    <div id="speedometer">
+        <div id="speed-text">0</div>
+        <div>km/h</div>
+    </div>
+    <div id="main-buttons-container" class="buttons-container">
+        <button id="requests-btn">Ver Solicitudes</button>
+        <button id="status-btn" class="available">Disponible</button>
+    </div>
+
+    <!-- Modal for requests -->
+    <div id="requests-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Solicitudes</h2>
+            <div id="taxi-requests">
+                <h3>Taxis</h3>
+                <ul id="taxi-requests-list"></ul>
+            </div>
+            <div id="delivery-requests">
+                <h3>Pedidos</h3>
+                <ul id="delivery-requests-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating button for current trip -->
+    <button id="view-assigned-order-btn">Ver Viaje Actual</button>
+
+    <!-- Panel for assigned trip details (NEW STRUCTURE) -->
+    <div id="assigned-order-panel">
+        <h3>Viaje Asignado</h3>
+        <div id="assigned-order-details"></div>
+        <!-- NEW HIDE BUTTON -->
+        <button id="hide-details-btn">Ocultar detalles del viaje</button>
+        <button id="complete-trip-btn">Completar Viaje</button>
+    </div>
+
+    <!-- Menu -->
+    <div class="menu-container">
+        <button id="menu-btn">☰</button>
+        <nav id="menu-nav">
+            <ul>
+                <li><a href="#map"><i class="fa-solid fa-map-location-dot"></i> Mapa</a></li>
+                <li><a href="#"><i class="fa-solid fa-route"></i> Viajes</a></li>
+                <li><a href="#"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+                <li><a href="#"><i class="fa-solid fa-user"></i> Cuenta</a></li>
+                <li><a href="#" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script src="driver.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzxl8zxRGhew5zIP4Lz7o_opWbFtw3T0Y&callback=initMap" async defer></script>
+</body>
+</html>

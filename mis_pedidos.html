@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="mis_pedidos.css">
+    <link rel="stylesheet" href="notification.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <a href="home.html"><i class="fas fa-arrow-left"></i></a>
+        <h1>Mis Pedidos</h1>
+        <!-- Espacio para mantener el centrado del título si no hay icono a la derecha -->
+        <div class="spacer"></div> 
+    </header>
+
+    <div class="search-filter-container">
+        <input type="search" id="searchOrdersInput" placeholder="Buscar por producto, estado, método...">
+        <div id="filterImageView"><i class="fas fa-filter"></i></div>
+    </div>
+
+    <main>
+        <div id="loading-spinner" class="spinner-container">
+            <div class="spinner"></div>
+        </div>
+
+        <div id="orders-list">
+            <!-- Pedidos se cargarán aquí -->
+        </div>
+
+        <div id="empty-orders" style="display: none;">
+            <img src="https://firebasestorage.googleapis.com/v0/b/taxinet-929d8.appspot.com/o/box-icon.png?alt=media&token=YOUR_FIREBASE_STORAGE_TOKEN_FOR_BOX_ICON" alt="No hay pedidos">
+            <h2>No tienes pedidos aún</h2>
+            <p>Parece que no has realizado ninguna compra. ¡Anímate a explorar nuestros productos!</p>
+            <button id="continueShoppingButton">Continuar comprando</button>
+        </div>
+    </main>
+
+    <!-- Modal de Detalle del Pedido -->
+    <div id="order-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalle del Pedido</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p><strong>Fecha:</strong> <span id="modal-order-date"></span></p>
+                <p><strong>Método de Entrega:</strong> <span id="modal-delivery-method"></span></p>
+                <p><strong>Estado:</strong> <span id="modal-order-status"></span></p>
+                
+                <div class="modal-products-list">
+                    <h3>Productos:</h3>
+                    <div id="modal-products-container"></div>
+                </div>
+                <p class="modal-total"><strong>Total:</strong> S/ <span id="modal-order-total"></span></p>
+
+                <div class="qr-code-container">
+                    <!-- El código QR se generará dinámicamente aquí dentro de un canvas o img -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Dialog Modal -->
+    <div id="filter-dialog-overlay" class="filter-dialog-overlay">
+        <div class="filter-dialog">
+            <h3>Filtrar Pedidos</h3>
+            <button id="filter-newest">Más nuevo primero</button>
+            <button id="filter-oldest">Más antiguo primero</button>
+            <button id="filter-date-range">Filtrar por rango de fechas</button>
+            <div class="date-range-inputs">
+                <input type="date" id="start-date">
+                <input type="date" id="end-date">
+                <button id="apply-date-filter">Aplicar Rango</button>
+            </div>
+            <button id="filter-clear">Limpiar filtros</button>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- Para generar QR, usando una librería sencilla para el navegador -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script> 
+
+    <script src="mis_pedidos.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>

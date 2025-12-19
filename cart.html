@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Yalopido</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <main id="main-content"></main>
+    <footer class="bottom-nav"></footer>
+
+    <!-- Modals -->
+    <div id="map-modal" class="modal"><div class="modal-content"><div class="modal-header"><h2>Selecciona tu ubicación</h2><span class="close-btn">&times;</span></div><div id="map"></div><input type="text" id="address-reference" placeholder="Añade una referencia (ej: casa con rejas negras)"><button id="confirm-location-btn" class="checkout-btn">Confirmar Ubicación</button></div></div>
+    <div id="order-summary-modal" class="modal"><div class="modal-content"><div class="modal-header"><h2>Resumen del Pedido</h2><span class="close-btn">&times;</span></div><div id="order-summary-text"></div><div id="qrcode"></div><button id="confirm-order-btn" class="checkout-btn">Confirmar Pedido</button></div></div>
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzxl8zxRGhew5zIP4Lz7o_opWbFtw3T0Y&libraries=places"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

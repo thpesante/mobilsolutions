@@ -1,0 +1,32 @@
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: #f7f7f7; color: #333; }
+        .top-bar { background-color: #2d2d2d; color: white; padding: 10px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 28px; font-weight: bold; color: #35a4e5; }
+        .profile-section { position: relative; display: flex; align-items: center; gap: 10px; } /* Modified for multiple buttons */
+        #login-btn, #register-btn, #user-view button { background: none; border: 1px solid white; color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; white-space: nowrap; }
+        #login-btn i, #register-btn i, #user-view i { margin-right: 8px; }
+        #user-view { display: none; align-items: center; }
+        #user-email { margin-right: 15px; }
+
+        #login-form-container, #register-form-container { display: none; position: absolute; right: 0; top: 45px; background-color: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); padding: 25px; width: 300px; z-index: 1001; color: #333; }
+        #register-form-container { right: -5px; width: 350px; } /* Adjust position for registration form */
+        #login-form-container.show, #register-form-container.show { display: block; }
+        #login-form-container h3, #register-form-container h3 { margin-top: 0; text-align: center; color: #2d2d2d; }
+        .input-group { margin-bottom: 15px; }
+        .input-group input, .input-group select { width: 92%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; box-sizing: border-box;} /* Added select */
+        #login-submit-btn, #register-submit-btn { width: 100%; padding: 12px; background-color: #35a4e5; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; font-size: 16px; font-weight: bold; }
+        #error-message, #register-error-message { color: #D8000C; text-align: center; margin-bottom: 15px; font-size: 14px; background-color: #FFD2D2; padding: 10px; border-radius: 5px; display: none; }
+
+        .hero-section { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; background-position: center; color: white; padding: 120px 40px; text-align: center; }
+        .hero-section h1 { font-size: 48px; margin: 0 0 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-weight: 900; }
+        #hero-login-btn, #hero-register-btn { background-color: #35a4e5; color: white; border: none; padding: 15px 35px; border-radius: 30px; cursor: pointer; font-size: 18px; font-weight: bold; margin: 0 10px; } /* Added hero-register-btn */
+
+        .content-section { padding: 50px 40px; background-color: white; }
+        .content-section h2 { text-align: center; font-size: 28px; margin-bottom: 40px; color: #444; }
+        .city-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto; }
+        .city-grid p { margin: 0; padding: 10px; text-align: center; }
+
+        footer { background-color: #35a4e5; color: white; padding: 50px 40px 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; margin-bottom: 40px; }
+        .footer-col h4 { margin-top: 0; margin-bottom: 15px; font-size: 18px; }
+        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 10px; }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.3); font-size: 14px; }

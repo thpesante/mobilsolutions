@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos - Yalopido</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="pedidos.css">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">Yalopido</div>
+            <div class="user-info">
+                <img id="user-profile-pic" src="" alt="Foto de perfil" class="profile-pic">
+                <p id="user-name"></p>
+            </div>
+        </div>
+        <ul class="sidebar-nav">
+            <li class="active" onclick="navigateTo('pedidos.html')"><i class="fas fa-receipt"></i> Pedidos</li>
+            <li onclick="navigateTo('ofertas.html')"><i class="fas fa-tags"></i> Ofertas</li>
+            <li onclick="navigateTo('productos.html')"><i class="fas fa-box-open"></i> Productos</li>
+            <li onclick="navigateTo('producto-destacado.html')"><i class="fas fa-star"></i> Producto destacado</li>
+            <li onclick="navigateTo('reportes.html')"><i class="fas fa-chart-line"></i> Reportes</li>
+            <li onclick="navigateTo('cuenta.html')"><i class="fas fa-user-shield"></i> Cuenta</li>
+        </ul>
+        <div class="sidebar-footer"><button id="logout-btn">Cerrar Sesión</button></div>
+    </aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <main class="main-content">
+        <header class="main-header">
+            <button class="menu-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
+            <h2>Panel de Pedidos</h2>
+        </header>
+        <h1 class="desktop-only">Panel de Pedidos</h1>
+        <div id="pedidos-container"><p>Cargando...</p></div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="pedidos.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto - Yalopido</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="ver-producto.css">
+</head>
+<body>
+
+    <main id="main-content">
+        <div id="loader" class="loading-container"><div class="spinner"></div><p>Cargando producto...</p></div>
+        <div id="product-content" class="hidden">
+            <div class="product-detail-container">
+                <div class="product-image-section">
+                    <img id="product-image" src="" alt="Imagen del producto">
+                </div>
+                <div class="product-info-section">
+                    <p id="product-seller" class="product-seller"></p>
+                    <h1 id="product-title" class="product-title"></h1>
+                    <p id="product-description" class="product-description"></p>
+                    <div id="price-section" class="price-section"></div>
+                    <div class="actions-section">
+                        <button id="add-to-cart-btn">Agregar al Carrito</button>
+                        <button id="buy-now-btn">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+            <section id="similar-products-section" class="similar-products-section hidden">
+                <h2>Productos Similares</h2>
+                <div id="similar-products-scroll" class="horizontal-scroll"></div>
+            </section>
+        </div>
+        <div id="error-state" class="hidden loading-container">
+            <p>Producto no encontrado.</p>
+            <a href="home.html">Volver al inicio</a>
+        </div>
+    </main>
+
+    <footer class="bottom-nav">
+        <a href="home.html"><i class="fas fa-home"></i><p>Inicio</p></a>
+        <a href="cart.html"><i class="fas fa-shopping-cart"></i><p>Carrito</p></a>
+        <a href="mis_pedidos.html"><i class="fas fa-receipt"></i><p>Pedidos</p></a>
+        <a href="mi-cuenta"><i class="fas fa-user"></i><p>Cuenta</p></a>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="ver-producto.js"></script>
+</body>
+</html>

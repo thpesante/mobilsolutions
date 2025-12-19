@@ -1,0 +1,466 @@
+:root {
+    --primary-purple: #673AB7;
+    --white: #FFFFFF;
+    --text-dark: #333333;
+    --text-medium: #666666;
+    --text-light: #999999;
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.12);
+    --border-light: #e0e0e0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f7f6;
+    padding-top: 60px; /* Ajuste para la barra superior fija */
+    padding-bottom: 16px;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    box-shadow: 0 2px 4px var(--shadow-light);
+    z-index: 1000;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 60px;
+    box-sizing: border-box;
+}
+
+.top-bar a {
+    color: var(--primary-purple);
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.top-bar h1 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+    font-size: 20px;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* Este div es para balancear el espacio si no hay icono a la derecha */
+.top-bar .spacer { 
+    width: 24px; 
+}
+
+.search-filter-container {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-light);
+    align-items: center;
+    box-shadow: 0 2px 4px var(--shadow-light);
+}
+
+#searchOrdersInput {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 1px solid var(--border-light);
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+#searchOrdersInput:focus {
+    outline: none;
+    border-color: var(--primary-purple);
+    box-shadow: 0 0 0 3px rgba(103, 58, 183, 0.2);
+}
+
+#filterImageView {
+    background-color: var(--primary-purple);
+    color: var(--white);
+    padding: 10px;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px var(--shadow-medium);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+#filterImageView:hover {
+    background-color: #5E35B1;
+    transform: scale(1.05);
+}
+
+main {
+    padding: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+}
+.spinner {
+    border: 4px solid rgba(103, 58, 183, 0.2);
+    border-top: 4px solid var(--primary-purple);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#empty-orders {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    margin-top: 20px;
+}
+#empty-orders img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+#empty-orders h2 {
+    color: var(--text-dark);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+#empty-orders p {
+    color: var(--text-medium);
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+#continueShoppingButton {
+    background-color: var(--primary-purple);
+    color: var(--white);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+#continueShoppingButton:hover {
+    background-color: #5E35B1;
+    transform: translateY(-2px);
+}
+
+.order-card {
+    background-color: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    margin-bottom: 16px;
+    padding: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.order-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px var(--shadow-medium);
+}
+.order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 10px;
+}
+.order-card-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--primary-purple);
+}
+.order-card-header span {
+    font-size: 14px;
+    color: var(--text-medium);
+    font-weight: 500;
+}
+.order-card-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: var(--text-dark);
+}
+.order-card-details .status {
+    font-weight: 600;
+    color: #28A745; /* Green for delivered, etc. */
+}
+.order-card-details .total {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text-dark);
+    margin-top: 10px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: auto;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px var(--shadow-medium);
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    animation: fadeIn 0.3s ease-out;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.modal-header h2 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--primary-purple);
+}
+.close-button {
+    color: var(--text-medium);
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.close-button:hover,
+.close-button:focus {
+    color: var(--text-dark);
+    text-decoration: none;
+}
+
+.modal-body p {
+    margin: 8px 0;
+    font-size: 15px;
+    color: var(--text-dark);
+}
+.modal-body p strong {
+    color: var(--primary-purple);
+}
+.modal-products-list {
+    border-top: 1px solid var(--border-light);
+    margin-top: 15px;
+    padding-top: 15px;
+}
+.modal-products-list h3 {
+    font-size: 18px;
+    color: var(--primary-purple);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.modal-product-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+}
+.modal-product-item:last-child {
+    border-bottom: none;
+}
+.modal-total {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: var(--text-dark);
+}
+.qr-code-container {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
+}
+/* El QR se generará como canvas/img dentro de este div por qrcode.js */
+.qr-code-container canvas, .qr-code-container img {
+    max-width: 180px;
+    height: auto;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 5px;
+    background-color: var(--white);
+}
+
+
+/* Filter Dialog */
+.filter-dialog-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 2001;
+    justify-content: center;
+    align-items: center;
+}
+.filter-dialog {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px var(--shadow-medium);
+    width: 90%;
+    max-width: 350px;
+    animation: fadeIn 0.3s ease-out;
+}
+.filter-dialog h3 {
+    margin-top: 0;
+    color: var(--primary-purple);
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.filter-dialog button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.filter-dialog button:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-1px);
+}
+.filter-dialog button.active {
+    background-color: var(--primary-purple);
+    color: var(--white);
+}
+.filter-dialog .date-range-inputs {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+.filter-dialog .date-range-inputs input {
+    padding: 10px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    font-size: 15px;
+}
+.filter-dialog .date-range-inputs button {
+    background-color: var(--primary-purple);
+    color: var(--white);
+    margin-top: 10px;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .top-bar {
+        padding: 8px 12px;
+        gap: 10px;
+    }
+    .top-bar h1 {
+        font-size: 18px;
+    }
+    .top-bar a {
+        font-size: 20px;
+    }
+    .search-filter-container {
+        padding: 12px;
+    }
+    #searchOrdersInput {
+        padding: 8px 12px;
+        font-size: 15px;
+    }
+    #filterImageView {
+        width: 20px;
+        height: 20px;
+        padding: 8px;
+    }
+    main {
+        padding: 12px;
+    }
+    #empty-orders h2 {
+        font-size: 20px;
+    }
+    #empty-orders p {
+        font-size: 14px;
+    }
+    #continueShoppingButton {
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+    .order-card {
+        padding: 12px;
+    }
+    .order-card-header h3 {
+        font-size: 16px;
+    }
+    .order-card-header span {
+        font-size: 12px;
+    }
+    .order-card-details p {
+        font-size: 13px;
+    }
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+    .modal-header h2 {
+        font-size: 20px;
+    }
+    .modal-body p {
+        font-size: 14px;
+    }
+    .modal-products-list h3 {
+        font-size: 16px;
+    }
+    .modal-product-item {
+        font-size: 13px;
+    }
+    .modal-total {
+        font-size: 16px;
+    }
+}
