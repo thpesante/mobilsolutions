@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="https://thpesante.github.io/mobilsolutions/">
     <title>Gestión de Productos - Yalopido</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="productos.css">
@@ -43,44 +44,65 @@
 
     <!-- Modal para Añadir/Editar Producto -->
     <div id="product-modal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content large">
             <span class="close-btn" id="close-product-modal">&times;</span>
             <h2 id="product-modal-title">Añadir Producto</h2>
             <form id="product-form">
                 <input type="hidden" id="product-id">
-                <div class="form-group">
-                    <label for="product-name">Nombre</label>
-                    <input type="text" id="product-name" required>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="product-name">Nombre</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="product-price">Precio Base</label>
+                        <input type="number" id="product-price" step="0.01" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="product-price">Precio</label>
-                    <input type="number" id="product-price" step="0.01" required>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="product-category">Categoría</label>
+                        <select id="product-category" required>
+                            <option value="">Selecciona una categoría</option>
+                            <option value="Alcohol">Alcohol</option>
+                            <option value="Bebidas">Bebidas</option>
+                            <option value="Comida Rápida">Comida Rápida</option>
+                            <option value="Comida">Comida</option>
+                            <option value="Farmacia">Farmacia</option>
+                            <option value="Snacks">Snacks</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="product-description">Descripción</label>
+                        <input type="text" id="product-description">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="product-category">Categoría</label>
-                    <select id="product-category" required>
-                        <option value="">Selecciona una categoría</option>
-                        <option value="Alcohol">Alcohol</option>
-                        <option value="Bebidas">Bebidas</option>
-                        <option value="Comida Rápida">Comida Rápida</option>
-                        <option value="Comida">Comida</option>
-                        <option value="Farmacia">Farmacia</option>
-                        <option value="Snacks">Snacks</option>
-                    </select>
+
+                <hr>
+                
+                <h4>Grupos de Opciones (Modificadores)</h4>
+                <div id="option-groups-container"></div>
+                <button type="button" id="add-option-group-btn" class="btn btn-secondary"><i class="fas fa-plus"></i> Añadir Grupo de Opciones</button>
+
+                <hr>
+
+                <h4>Imagen del Producto</h4>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="product-image-file">Subir Imagen (prioridad)</label>
+                        <input type="file" id="product-image-file" accept="image/*">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="product-image-url">O Pegar URL de Imagen</label>
+                        <input type="url" id="product-image-url" placeholder="https://ejemplo.com/imagen.png">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="product-description">Descripción</label>
-                    <input type="text" id="product-description">
+
+                <div class="modal-footer">
+                    <button type="submit" id="save-product-btn" class="btn btn-primary">Guardar Producto</button>
                 </div>
-                <div class="form-group">
-                    <label for="product-image-file">Subir Imagen (prioridad)</label>
-                    <input type="file" id="product-image-file" accept="image/*">
-                </div>
-                <div class="form-group">
-                    <label for="product-image-url">O Pegar URL de Imagen</label>
-                    <input type="url" id="product-image-url" placeholder="https://ejemplo.com/imagen.png">
-                </div>
-                <button type="submit" id="save-product-btn" class="btn" style="background-color: #28a745; color: white;">Guardar</button>
             </form>
         </div>
     </div>
@@ -124,6 +146,23 @@
                     <button id="cancel-import-btn" class="btn" style="background-color: #6c757d; color: white;">Cancelar</button>
                     <button id="confirm-import-btn" class="btn" style="background-color: #28a745; color: white;">Confirmar y Crear Productos</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación de Borrado -->
+    <div id="delete-confirm-modal" class="modal">
+        <div class="modal-content small">
+            <span class="close-btn" id="close-delete-modal">&times;</span>
+            <h2>Confirmar Eliminación</h2>
+            <p>¿Estás seguro de que quieres eliminar este producto?</p>
+            <div id="delete-product-info" style="display: flex; align-items: center; gap: 15px; margin: 20px 0; background: #f9f9f9; padding: 10px; border-radius: 5px;">
+                <img id="delete-product-image" src="" alt="Producto" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                <strong id="delete-product-name"></strong>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button id="cancel-delete-btn" class="btn btn-secondary">Cancelar</button>
+                <button id="confirm-delete-btn" class="btn btn-danger">Eliminar</button>
             </div>
         </div>
     </div>
