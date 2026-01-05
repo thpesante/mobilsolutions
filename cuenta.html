@@ -35,75 +35,51 @@
                 </div>
                 <div class="form-group"><label for="full-name">Nombre Completo</label><input type="text" id="full-name"></div>
                 <div class="form-group"><label for="phone">Teléfono</label><input type="tel" id="phone"></div>
-                <div class="form-group"><label for="address">Dirección</label><input type="text" id="address"></div>
+                <div class="form-group"><label for="address">Dirección (Provincia, Cantón)</label><input type="text" id="address"></div>
                 <button id="save-profile-btn" class="btn btn-primary">Guardar Cambios</button>
             </div>
+
+            <div class="card">
+                <h2>Información Adicional del Local</h2>
+                <div class="form-group"><label for="local-address">Dirección Detallada del Local</label><input type="text" id="local-address" placeholder="Ej. Av. Principal, 123, frente al parque"></div>
+                <div class="form-group"><label for="local-description">Descripción del Local</label><textarea id="local-description" placeholder="Describe tu negocio, qué lo hace especial..."></textarea></div>
+                <div class="form-group"><label for="local-services">Servicios que Ofreces</label><textarea id="local-services" placeholder="Ej. Delivery, Reservas, Eventos especiales..."></textarea></div>
+                <h3>Redes Sociales</h3>
+                <div class="form-group social-input"><i class="fab fa-facebook"></i><input type="text" id="facebook-url" placeholder="URL de Facebook"></div>
+                <div class="form-group social-input"><i class="fab fa-instagram"></i><input type="text" id="instagram-url" placeholder="URL de Instagram"></div>
+                <div class="form-group social-input"><i class="fab fa-whatsapp"></i><input type="text" id="whatsapp-url" placeholder="Número de WhatsApp"></div>
+                <div class="form-group social-input"><i class="fab fa-tiktok"></i><input type="text" id="tiktok-url" placeholder="URL de TikTok"></div>
+                <button id="save-local-info-btn" class="btn btn-primary">Guardar Información Adicional</button>
+            </div>
+
             <div class="card">
                 <h2>Seguridad</h2>
                 <button id="open-password-modal-btn" class="btn btn-secondary">Cambiar Contraseña</button>
             </div>
 
-            <!-- Nuevo Card: Horario de Atención -->
             <div class="card">
                 <h2>Horario de Atención</h2>
                 <div id="schedule-form">
-                    <!-- Días de la semana -->
-                    <div class="schedule-day">
-                        <label for="monday-open">Lunes:</label>
-                        <input type="time" id="monday-open" value="09:00">
-                        <input type="time" id="monday-close" value="18:00">
-                    </div>
-                    <div class="schedule-day">
-                        <label for="tuesday-open">Martes:</label>
-                        <input type="time" id="tuesday-open" value="09:00">
-                        <input type="time" id="tuesday-close" value="18:00">
-                    </div>
-                    <div class="schedule-day">
-                        <label for="wednesday-open">Miércoles:</label>
-                        <input type="time" id="wednesday-open" value="09:00">
-                        <input type="time" id="wednesday-close" value="18:00">
-                    </div>
-                    <div class="schedule-day">
-                        <label for="thursday-open">Jueves:</label>
-                        <input type="time" id="thursday-open" value="09:00">
-                        <input type="time" id="thursday-close" value="18:00">
-                    </div>
-                    <div class="schedule-day">
-                        <label for="friday-open">Viernes:</label>
-                        <input type="time" id="friday-open" value="09:00">
-                        <input type="time" id="friday-close" value="18:00">
-                    </div>
-                    <div class="schedule-day">
-                        <label for="saturday-open">Sábado:</label>
-                        <input type="time" id="saturday-open" value="09:00">
-                        <input type="time" id="saturday-close" value="14:00">
-                    </div>
-                    <div class="schedule-day">
-                        <label for="sunday-open">Domingo:</label>
-                        <input type="time" id="sunday-open" value="">
-                        <input type="time" id="sunday-close" value="">
-                    </div>
+                    <div class="schedule-day"><label for="monday-open">Lunes:</label><input type="time" id="monday-open" value="09:00"><input type="time" id="monday-close" value="18:00"></div>
+                    <div class="schedule-day"><label for="tuesday-open">Martes:</label><input type="time" id="tuesday-open" value="09:00"><input type="time" id="tuesday-close" value="18:00"></div>
+                    <div class="schedule-day"><label for="wednesday-open">Miércoles:</label><input type="time" id="wednesday-open" value="09:00"><input type="time" id="wednesday-close" value="18:00"></div>
+                    <div class="schedule-day"><label for="thursday-open">Jueves:</label><input type="time" id="thursday-open" value="09:00"><input type="time" id="thursday-close" value="18:00"></div>
+                    <div class="schedule-day"><label for="friday-open">Viernes:</label><input type="time" id="friday-open" value="09:00"><input type="time" id="friday-close" value="18:00"></div>
+                    <div class="schedule-day"><label for="saturday-open">Sábado:</label><input type="time" id="saturday-open" value="09:00"><input type="time" id="saturday-close" value="14:00"></div>
+                    <div class="schedule-day"><label for="sunday-open">Domingo:</label><input type="time" id="sunday-open" value=""><input type="time" id="sunday-close" value=""></div>
                 </div>
                 <button id="save-schedule-btn" class="btn btn-primary">Guardar Horario</button>
             </div>
 
-            <!-- Nuevo Card: Estado del Local -->
             <div class="card">
                 <h2>Estado del Local</h2>
                 <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
                     <label for="closed-today-toggle" style="margin-bottom: 0;">Hoy no hay atención:</label>
-                    <label class="switch">
-                        <input type="checkbox" id="closed-today-toggle">
-                        <span class="slider round"></span>
-                    </label>
+                    <label class="switch"><input type="checkbox" id="closed-today-toggle"><span class="slider round"></span></label>
                 </div>
-                <div class="form-group" id="reason-group">
-                    <label for="closed-reason">Motivo (opcional):</label>
-                    <textarea id="closed-reason" placeholder="Ej. Remodelación, feriado, etc."></textarea>
-                </div>
+                <div class="form-group" id="reason-group"><label for="closed-reason">Motivo (opcional):</label><textarea id="closed-reason" placeholder="Ej. Remodelación, feriado, etc."></textarea></div>
                 <button id="save-status-btn" class="btn btn-primary">Actualizar Estado</button>
             </div>
-
         </div>
     </main>
 
