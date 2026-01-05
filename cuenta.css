@@ -24,6 +24,10 @@ h1.desktop-only { color: #00897b; border-bottom: 2px solid #f0f0f0; padding-bott
 .btn { padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
 .btn-primary { background-color: #E5356F; color: white; }
 .btn-secondary { background-color: #00897b; color: white; }
+.social-input { display: flex; align-items: center; }
+.social-input i { font-size: 20px; margin-right: 10px; color: #555; }
+.social-input input { flex-grow: 1; padding-left: 10px; }
+
 
 /* Estilos para el toggle switch */
 .switch { position: relative; display: inline-block; width: 60px; height: 34px; }
