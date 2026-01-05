@@ -6,10 +6,37 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 let currentUser = null, imageFile = null;
 
-const userEmailSpan = document.getElementById('user-email'), logoutBtn = document.getElementById('logout-btn'), loader = document.getElementById('loader'), accountContent = document.getElementById('account-content'), profileImage = document.getElementById('profile-image'), profilePicInput = document.getElementById('profile-pic-input'), fullNameInput = document.getElementById('full-name'), phoneInput = document.getElementById('phone'), addressInput = document.getElementById('address'), saveProfileBtn = document.getElementById('save-profile-btn');
-const passwordModal = document.getElementById('password-modal'), openPasswordModalBtn = document.getElementById('open-password-modal-btn'), closeModalBtn = document.getElementById('close-modal-btn'), cancelPasswordBtn = document.getElementById('cancel-password-btn'), savePasswordBtn = document.getElementById('save-password-btn'), currentPasswordInput = document.getElementById('current-password'), newPasswordInput = document.getElementById('new-password'), confirmPasswordInput = document.getElementById('confirm-password'), modalErrorMsg = document.getElementById('modal-error-msg');
+// --- Elementos del DOM ---
+const userEmailSpan = document.getElementById('user-email'),
+    logoutBtn = document.getElementById('logout-btn'),
+    loader = document.getElementById('loader'),
+    accountContent = document.getElementById('account-content'),
+    profileImage = document.getElementById('profile-image'),
+    profilePicInput = document.getElementById('profile-pic-input'),
+    fullNameInput = document.getElementById('full-name'),
+    phoneInput = document.getElementById('phone'),
+    addressInput = document.getElementById('address'),
+    saveProfileBtn = document.getElementById('save-profile-btn');
 
-// Nuevos elementos para horario y estado del local
+const localAddressInput = document.getElementById('local-address');
+const localDescriptionInput = document.getElementById('local-description');
+const localServicesInput = document.getElementById('local-services');
+const facebookUrlInput = document.getElementById('facebook-url');
+const instagramUrlInput = document.getElementById('instagram-url');
+const whatsappUrlInput = document.getElementById('whatsapp-url');
+const tiktokUrlInput = document.getElementById('tiktok-url');
+const saveLocalInfoBtn = document.getElementById('save-local-info-btn');
+
+const passwordModal = document.getElementById('password-modal'),
+    openPasswordModalBtn = document.getElementById('open-password-modal-btn'),
+    closeModalBtn = document.getElementById('close-modal-btn'),
+    cancelPasswordBtn = document.getElementById('cancel-password-btn'),
+    savePasswordBtn = document.getElementById('save-password-btn'),
+    currentPasswordInput = document.getElementById('current-password'),
+    newPasswordInput = document.getElementById('new-password'),
+    confirmPasswordInput = document.getElementById('confirm-password'),
+    modalErrorMsg = document.getElementById('modal-error-msg');
+
 const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 const scheduleInputs = {};
 daysOfWeek.forEach(day => {
@@ -27,12 +54,15 @@ auth.onAuthStateChanged(user => {
     if (user) {
         currentUser = user;
         userEmailSpan.textContent = user.email;
-        loadUserData();
-        loadScheduleAndStatus();
-    } else { window.location.href = 'app.html'; }
+        loadAllUserData();
+    } else {
+        window.location.href = 'app.html';
+    }
 });
 
-async function loadUserData() {
+async function loadAllUserData() {
+    loader.style.display = 'block';
+    accountContent.style.display = 'none';
     try {
         const userDoc = await db.collection('users').doc(currentUser.uid).get();
         if (userDoc.exists) {
@@ -41,17 +71,16 @@ async function loadUserData() {
             phoneInput.value = data.phone || '';
             addressInput.value = (data.province && data.canton) ? `${data.province}, ${data.canton}` : (data.province || data.canton || '');
             if (data.profilePicUrl) { profileImage.src = data.profilePicUrl; }
-        }
-    } catch (error) { alert("No se pudieron cargar tus datos.");
-    } finally { loader.style.display = 'none'; accountContent.style.display = 'block'; }
-}
 
-async function loadScheduleAndStatus() {
-    try {
-        const userDoc = await db.collection('users').doc(currentUser.uid).get();
-        if (userDoc.exists) {
-            const data = userDoc.data();
-            // Cargar horario
+            localAddressInput.value = data.localAddress || '';
+            localDescriptionInput.value = data.localDescription || '';
+            localServicesInput.value = data.localServices || '';
+            if (data.socialMedia) {
+                facebookUrlInput.value = data.socialMedia.facebook || '';
+                instagramUrlInput.value = data.socialMedia.instagram || '';
+                whatsappUrlInput.value = data.socialMedia.whatsapp || '';
+                tiktokUrlInput.value = data.socialMedia.tiktok || '';
+            }
             if (data.schedule) {
                 daysOfWeek.forEach(day => {
                     if (data.schedule[day]) {
@@ -60,7 +89,6 @@ async function loadScheduleAndStatus() {
                     }
                 });
             }
-            // Cargar estado del local
             if (data.status) {
                 closedTodayToggle.checked = data.status.closedToday || false;
                 closedReasonInput.value = data.status.reason || '';
@@ -68,8 +96,11 @@ async function loadScheduleAndStatus() {
             }
         }
     } catch (error) {
-        console.error("Error al cargar horario y estado del local:", error);
-        alert("No se pudo cargar el horario o estado del local.");
+        console.error("Error al cargar datos:", error);
+        alert("No se pudieron cargar tus datos.");
+    } finally {
+        loader.style.display = 'none';
+        accountContent.style.display = 'block';
     }
 }
 
@@ -91,13 +122,67 @@ saveProfileBtn.addEventListener('click', async () => {
             profilePicUrl = await uploadTask.ref.getDownloadURL();
         }
         const addressParts = addressInput.value.split(',').map(s => s.trim());
-        await db.collection('users').doc(currentUser.uid).update({ fullName: fullNameInput.value, phone: phoneInput.value, province: addressParts[0] || '', canton: addressParts[1] || '', profilePicUrl: profilePicUrl });
+        await db.collection('users').doc(currentUser.uid).set({ 
+            fullName: fullNameInput.value, 
+            phone: phoneInput.value, 
+            province: addressParts[0] || '', 
+            canton: addressParts[1] || '', 
+            profilePicUrl: profilePicUrl 
+        }, { merge: true });
         alert('¡Perfil actualizado!');
-    } catch (error) { alert(`Error: ${error.message}`);
-    } finally { saveProfileBtn.disabled = false; saveProfileBtn.textContent = 'Guardar Cambios'; imageFile = null; }
+    } catch (error) {
+        alert(`Error: ${error.message}`);
+    } finally {
+        saveProfileBtn.disabled = false; saveProfileBtn.textContent = 'Guardar Cambios'; imageFile = null;
+    }
 });
 
-// Guardar Horario
+// --- CÓDIGO ACTUALIZADO PARA GUARDAR INFORMACIÓN DEL LOCAL ---
+saveLocalInfoBtn.addEventListener('click', async () => {
+    console.log("Botón 'Guardar Información Adicional' presionado.");
+
+    if (!currentUser) {
+        console.error('Error de autenticación: No se encontró un usuario actual.');
+        alert('Error de usuario. Por favor, recarga la página e intenta de nuevo.');
+        return;
+    }
+    
+    console.log('Usuario autenticado:', currentUser.uid);
+
+    saveLocalInfoBtn.disabled = true;
+    saveLocalInfoBtn.textContent = 'Guardando...';
+
+    const localData = {
+        localAddress: localAddressInput.value,
+        localDescription: localDescriptionInput.value,
+        localServices: localServicesInput.value,
+        socialMedia: {
+            facebook: facebookUrlInput.value,
+            instagram: instagramUrlInput.value,
+            whatsapp: whatsappUrlInput.value,
+            tiktok: tiktokUrlInput.value
+        }
+    };
+    
+    console.log('Datos a guardar:', JSON.stringify(localData, null, 2));
+
+    try {
+        await db.collection('users').doc(currentUser.uid).set(localData, { merge: true });
+
+        console.log('Datos guardados exitosamente en Firestore.');
+        alert('¡Información del local guardada con éxito!');
+        
+    } catch (error) {
+        console.error("Error detallado al guardar información del local:", error);
+        alert(`Ocurrió un error al guardar. Revisa la consola del navegador para más detalles (Presiona F12 o clic derecho > Inspeccionar > Consola).`);
+        
+    } finally {
+        saveLocalInfoBtn.disabled = false;
+        saveLocalInfoBtn.textContent = 'Guardar Información Adicional';
+    }
+});
+
+
 saveScheduleBtn.addEventListener('click', async () => {
     saveScheduleBtn.disabled = true; saveScheduleBtn.textContent = 'Guardando...';
     try {
@@ -107,42 +192,38 @@ saveScheduleBtn.addEventListener('click', async () => {
             const closeTime = scheduleInputs[`${day}Close`].value;
             scheduleData[day] = { open: openTime, close: closeTime };
         });
-        await db.collection('users').doc(currentUser.uid).update({ schedule: scheduleData });
+        await db.collection('users').doc(currentUser.uid).set({ schedule: scheduleData }, { merge: true });
         alert('¡Horario actualizado!');
     } catch (error) {
-        console.error("Error al guardar el horario:", error);
-        alert(`Error al guardar horario: ${error.message}`);
+        console.error("Error al guardar horario:", error);
+        alert(`Error: ${error.message}`);
     } finally {
         saveScheduleBtn.disabled = false; saveScheduleBtn.textContent = 'Guardar Horario';
     }
 });
 
-// Toggle para mostrar/ocultar el motivo
 closedTodayToggle.addEventListener('change', () => {
     reasonGroup.style.display = closedTodayToggle.checked ? 'block' : 'none';
-    if (!closedTodayToggle.checked) {
-        closedReasonInput.value = ''; // Limpiar el motivo si se activa
-    }
+    if (!closedTodayToggle.checked) { closedReasonInput.value = ''; }
 });
 
-// Guardar Estado del Local
 saveStatusBtn.addEventListener('click', async () => {
     saveStatusBtn.disabled = true; saveStatusBtn.textContent = 'Actualizando...';
     try {
-        const statusData = {
-            closedToday: closedTodayToggle.checked,
-            reason: closedReasonInput.value.trim()
-        };
-        await db.collection('users').doc(currentUser.uid).update({ status: statusData });
+        await db.collection('users').doc(currentUser.uid).set({ 
+            status: {
+                closedToday: closedTodayToggle.checked,
+                reason: closedReasonInput.value.trim()
+            }
+        }, { merge: true });
         alert('¡Estado del local actualizado!');
     } catch (error) {
-        console.error("Error al guardar el estado del local:", error);
-        alert(`Error al guardar estado: ${error.message}`);
+        console.error("Error al guardar estado:", error);
+        alert(`Error: ${error.message}`);
     } finally {
         saveStatusBtn.disabled = false; saveStatusBtn.textContent = 'Actualizar Estado';
     }
 });
-
 
 const showModal = () => passwordModal.style.display = 'flex';
 const hideModal = () => {
@@ -158,7 +239,6 @@ window.addEventListener('click', e => { if (e.target == passwordModal) hideModal
 
 savePasswordBtn.addEventListener('click', async () => {
     const currentPassword = currentPasswordInput.value, newPassword = newPasswordInput.value, confirmPassword = confirmPasswordInput.value;
-    modalErrorMsg.style.display = 'none';
     if (!currentPassword || !newPassword || !confirmPassword) { modalErrorMsg.textContent = 'Todos los campos son obligatorios.'; modalErrorMsg.style.display = 'block'; return; }
     if (newPassword.length < 6) { modalErrorMsg.textContent = 'La nueva contraseña debe tener al menos 6 caracteres.'; modalErrorMsg.style.display = 'block'; return; }
     if (newPassword !== confirmPassword) { modalErrorMsg.textContent = 'Las nuevas contraseñas no coinciden.'; modalErrorMsg.style.display = 'block'; return; }
@@ -172,14 +252,12 @@ savePasswordBtn.addEventListener('click', async () => {
     } catch (error) {
         modalErrorMsg.textContent = (error.code == 'auth/wrong-password') ? 'La contraseña actual es incorrecta.' : `Error: ${error.message}`;
         modalErrorMsg.style.display = 'block';
-    } finally { savePasswordBtn.disabled = false; savePasswordBtn.textContent = 'Guardar'; }
+    } finally {
+        savePasswordBtn.disabled = false; savePasswordBtn.textContent = 'Guardar';
+    }
 });
 
-logoutBtn.addEventListener('click', () => {
-    auth.signOut().then(() => {
-        window.location.href = 'app.html';
-    });
-});
+logoutBtn.addEventListener('click', () => { auth.signOut().then(() => { window.location.href = 'app.html'; }); });
 
 const menuBtn = document.getElementById('menu-btn');
 const sidebar = document.getElementById('sidebar');
